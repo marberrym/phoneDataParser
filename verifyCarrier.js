@@ -1,7 +1,7 @@
 require('dotenv').config();
 const client = require('twilio')(process.env.SID, process.env.token);
 const fs = require('fs');
-const csv = require('csvtojson');
+const csv = require('csvtojson/v1');
 
 const verifiedDataSource = './csvData/testResults.csv'
 const verifiedDataStore = './csvData/verifiedNums.csv'
@@ -13,23 +13,21 @@ let verifyNums = (dataSource, dataStore) => {
             throw err;
         }
     })
-    try {
-        csv().fromFile(dataSource)
-        .on('json', (json) => {
-            fs.appendFile(dataStore, json, (err, file) => {
-                if (err) {
-                    console.log(err);
-                    throw err;
-                }
-            })
+
+    csv().fromFile(dataSource)
+    .on('json', (jsonObj) => {
+        let body = `${jsonObj.phone}, mobile,\n`
+        fs.appendFile(dataStore, body, (err, file) => {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
         })
-        .on('done', () => {
-            console.log('done')
-        })
-    }
-    catch(error) {
-        console.log(error)
-    }
+        console.log(jsonObj)
+    })
+    .on('done', () => {
+        console.log("DONE")
+    })
 }
 
 verifyNums(verifiedDataSource, verifiedDataStore);
