@@ -7,7 +7,7 @@ let twilioNum = '+14704410636'
 
 let testResults = './csvData/testResults.csv'
 
-let body = 'Hey this is Matt with PRB. Sent with hand crafted code by yours truly.'
+let body = 'Hey this is Dustin with Piedmont Ridge Builders, we are doing some work in your neighborhood and I wanted to see if you were interested in selling your property.'
 
 let fireTexts = (dataSource) => {
     try {

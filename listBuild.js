@@ -1,7 +1,6 @@
 const csv = require('csvtojson/v1');
 const fs = require('fs');
 
-let sendList = [];
 let contacts = './csvData/contacts.csv';
 let results = './csvData/results.csv';
 
